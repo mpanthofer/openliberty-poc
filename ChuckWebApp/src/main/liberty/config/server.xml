@@ -4,7 +4,7 @@
     	<feature>transportSecurity-1.0</feature>
     </featureManager>
 
-    <httpEndpoint httpPort="${default.http.port}" httpsPort="${default.https.port}" id="defaultHttpEndpoint"  host="*" />
+    <httpEndpoint httpPort="${httpPort}" httpsPort="${httpsPort}" id="defaultHttpEndpoint"  host="*" />
     
     <keyStore id="defaultKeyStore" location="keystore.p12" password="changeit" type="PKCS12"/>
 </server>
