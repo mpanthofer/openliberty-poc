@@ -25,7 +25,7 @@
 		<openliberty.https.port>8543</openliberty.https.port>
 		<openliberty.home>/home/jgitter/bin/openliberty</openliberty.home>
 		<openliberty.server>chuck</openliberty.server>
-		<openliberty.Xmx>256</openliberty.Xmx>
+		<openliberty.Xmx>1028m</openliberty.Xmx>
 	</properties>
 
 	<dependencies>
@@ -260,7 +260,6 @@
 									<bootstrapProperties>
 										<httpPort>${openliberty.http.port}</httpPort>
 										<httpsPort>${openliberty.https.port}</httpsPort>
-										<app.location>${project.build.directory}/${project.artifactId}-${project.version}.war</app.location>
 									</bootstrapProperties>
 									<jvmOptions>
 										<param>-Xmx${openliberty.Xmx}</param>
@@ -305,7 +304,7 @@
 									<goal>start-server</goal>
 								</goals>
 								<configuration>
-									<installDirectory>${openliberty.home}/wlp</installDirectory>
+									<installDirectory>${openliberty.home}</installDirectory>
 									<serverName>${openliberty.server}</serverName>
 									<configFile>${project.build.directory}/server.xml</configFile>
 									<bootstrapProperties>

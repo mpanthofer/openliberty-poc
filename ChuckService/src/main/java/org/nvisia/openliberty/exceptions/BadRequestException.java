@@ -1,32 +1,31 @@
 package org.nvisia.openliberty.exceptions;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.Response.Status;
 
-@ResponseStatus(code = HttpStatus.BAD_REQUEST, reason = "Client request error")
-public class BadRequestException extends ChuckException {
+public class BadRequestException extends WebApplicationException {
 
 	private static final long serialVersionUID = 5685980176656585573L;
 
+	private static final Status DEFAULT_STATUS = Status.BAD_REQUEST;
+
 	public BadRequestException() {
-		super();
+		super(DEFAULT_STATUS);
 	}
 
-	public BadRequestException(String arg0, Throwable arg1, boolean arg2, boolean arg3) {
-		super(arg0, arg1, arg2, arg3);
+	public BadRequestException(Status status) {
+		super(DEFAULT_STATUS);
 	}
 
-	public BadRequestException(String arg0, Throwable arg1) {
-		super(arg0, arg1);
+	public BadRequestException(String message) {
+		super(message, DEFAULT_STATUS);
 	}
 
-	public BadRequestException(String arg0) {
-		super(arg0);
+	public BadRequestException(String message, Throwable cause) {
+		super(message, cause, DEFAULT_STATUS);
 	}
 
-	public BadRequestException(Throwable arg0) {
-		super(arg0);
-	}
-
-	
+	public BadRequestException(Throwable cause) {
+		super(cause, DEFAULT_STATUS);
+	}	
 }

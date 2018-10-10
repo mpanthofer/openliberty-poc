@@ -3,6 +3,8 @@ package org.nvisia.openliberty.dao;
 import java.io.IOException;
 import java.util.Arrays;
 
+import javax.enterprise.context.RequestScoped;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.fluent.Request;
@@ -10,11 +12,10 @@ import org.nvisia.openliberty.dao.icndb.ChuckJoke;
 import org.nvisia.openliberty.dao.icndb.ChuckModel;
 import org.nvisia.openliberty.exceptions.BadRequestException;
 import org.nvisia.openliberty.exceptions.ChuckException;
-import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-@Component
+@RequestScoped
 public class ChuckDaoImpl implements ChuckDao {
 
 	private static final String ICNDB_BASE_URI = "http://api.icndb.com/jokes";

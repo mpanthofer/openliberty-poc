@@ -22,12 +22,12 @@
 
 	<properties>
 		<spring.version>5.1.0.RELEASE</spring.version>
- 		<warContext>${project.artifactId}</warContext>
+		<warContext>${project.artifactId}</warContext>
 
 		<openliberty.http.port>8080</openliberty.http.port>
 		<openliberty.https.port>8443</openliberty.https.port>
 		<openliberty.home>/home/jgitter/bin/openliberty</openliberty.home>
-		<openliberty.Xmx>256</openliberty.Xmx>
+		<openliberty.Xmx>1028m</openliberty.Xmx>
 	</properties>
 
 	<dependencies>
@@ -37,13 +37,19 @@
 			<version>3.1.0</version>
 			<scope>provided</scope>
 		</dependency>
-
 		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-webmvc</artifactId>
-			<version>${spring.version}</version>
-			<scope>compile</scope>
+			<groupId>javax.ws.rs</groupId>
+			<artifactId>javax.ws.rs-api</artifactId>
+			<version>2.1</version>
+			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>javax.enterprise</groupId>
+			<artifactId>cdi-api</artifactId>
+			<version>2.0</version>
+			<scope>provided</scope>
+		</dependency>
+
 
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
@@ -180,8 +186,8 @@
 								<configuration>
 									<configFile>${project.build.directory}/server.xml</configFile>
 									<bootstrapProperties>
-										<httpPort>${openliberty.http.port}</httpPort>
-										<httpsPort>${openliberty.https.port}</httpsPort>
+										<default.http.port>${openliberty.http.port}</default.http.port>
+										<default.https.port>${openliberty.https.port}</default.https.port>
 										<app.context.root>${warContext}</app.context.root>
 									</bootstrapProperties>
 									<jvmOptions>
@@ -227,12 +233,12 @@
 									<goal>start-server</goal>
 								</goals>
 								<configuration>
-									<installDirectory>${openliberty.home}/wlp</installDirectory>
+									<installDirectory>${openliberty.home}</installDirectory>
 									<serverName>${project.artifactId}</serverName>
 									<configFile>${project.build.directory}/server.xml</configFile>
 									<bootstrapProperties>
-										<httpPort>${openliberty.http.port}</httpPort>
-										<httpsPort>${openliberty.https.port}</httpsPort>
+										<default.http.port>${openliberty.http.port}</default.http.port>
+										<default.https.port>${openliberty.https.port}</default.https.port>
 									</bootstrapProperties>
 									<jvmOptions>
 										<param>-Xmx${openliberty.Xmx}</param>
