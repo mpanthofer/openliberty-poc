@@ -225,6 +225,8 @@
 						<version>RELEASE</version>
 						<type>zip</type>
 					</assemblyArtifact>
+					<installDirectory>${openliberty.home}</installDirectory>
+					<serverName>${openliberty.server}</serverName>
 				</configuration>
 			</plugin>
 		</plugins>
