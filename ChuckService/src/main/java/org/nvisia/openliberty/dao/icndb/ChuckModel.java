@@ -1,4 +1,4 @@
-package org.gitter.openliberty.dao.icndb;
+package org.nvisia.openliberty.dao.icndb;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

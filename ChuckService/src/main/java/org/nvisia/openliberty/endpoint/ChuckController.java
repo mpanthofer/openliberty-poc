@@ -1,10 +1,10 @@
-package org.gitter.openliberty.endpoint;
+package org.nvisia.openliberty.endpoint;
 
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
-import org.gitter.openliberty.dao.ChuckDao;
-import org.gitter.openliberty.dao.icndb.ChuckJoke;
+import org.nvisia.openliberty.dao.ChuckDao;
+import org.nvisia.openliberty.dao.icndb.ChuckJoke;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;

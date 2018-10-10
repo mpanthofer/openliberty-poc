@@ -1,4 +1,4 @@
-package org.gitter.openliberty.dao;
+package org.nvisia.openliberty.dao;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -6,10 +6,10 @@ import java.util.Arrays;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.fluent.Request;
-import org.gitter.openliberty.dao.icndb.ChuckJoke;
-import org.gitter.openliberty.dao.icndb.ChuckModel;
-import org.gitter.openliberty.exceptions.BadRequestException;
-import org.gitter.openliberty.exceptions.ChuckException;
+import org.nvisia.openliberty.dao.icndb.ChuckJoke;
+import org.nvisia.openliberty.dao.icndb.ChuckModel;
+import org.nvisia.openliberty.exceptions.BadRequestException;
+import org.nvisia.openliberty.exceptions.ChuckException;
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
