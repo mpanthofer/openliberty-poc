@@ -10,7 +10,7 @@ IBM OpenLiberty POC
 - In each project run
   - mvn clean install -Pstart-liberty
     - This will create your server, configure it, and start it
-    - If you change the bootstrap properties, you will need to rerun this and restart the liberty server
+    - If you change the server.xml or the bootstrap properties, you will need to rerun this and restart the liberty server
   - mvn clean install -Pdeploy
     - This will deploy the applications to the server
     - You can rerun this multiple times during development without restarting the liberty server
