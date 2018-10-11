@@ -1,5 +1,5 @@
 # openliberty-poc
-IBM OpenLiberty POC
+Prototype using IBM OpenLiberty.
 
 # Instructions to run the Prototype
 - Download and install the OpenLiberty server
