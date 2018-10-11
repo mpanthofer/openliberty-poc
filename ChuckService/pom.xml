@@ -90,6 +90,14 @@
 					<include>server.xml</include>
 				</includes>
 			</resource>
+			<resource>
+				<directory>${basedir}/src/main/liberty/config</directory>
+				<targetPath>${project.build.directory}</targetPath>
+				<filtering>false</filtering>
+				<includes>
+					<include>keystore.p12</include>
+				</includes>
+			</resource>
 		</resources>
 		<plugins>
 			<plugin>
@@ -271,6 +279,38 @@
 								<configuration>
 									<appArchive>${project.build.directory}/${project.artifactId}-${project.version}.war</appArchive>
 									<installDirectory>${openliberty.home}</installDirectory>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<artifactId>maven-resources-plugin</artifactId>
+						<version>2.7</version>
+						<dependencies>
+							<dependency>
+								<groupId>org.apache.maven.shared</groupId>
+								<artifactId>maven-filtering</artifactId>
+								<version>1.3</version>
+							</dependency>
+						</dependencies>
+						<executions>
+							<execution>
+								<id>copy-keystore</id>
+								<phase>pre-integration-test</phase>
+								<goals>
+									<goal>copy-resources</goal>
+								</goals>
+								<configuration>
+									<outputDirectory>${openliberty.home}/usr/servers/chuck-service</outputDirectory>
+									<resources>
+										<resource>
+											<directory>${project.build.directory}</directory>
+											<filtering>false</filtering>
+											<includes>
+												<include>keystore.p12</include>
+											</includes>
+										</resource>
+									</resources>
 								</configuration>
 							</execution>
 						</executions>
