@@ -4,6 +4,7 @@ Prototype using IBM OpenLiberty.
 # Instructions to run the Prototype
 - Download and install the OpenLiberty server
   - I'm running Open Liberty 18.0.0.3 against OpenJDK 1.8.0_171
+  - If you skip this step, the start-liberty profile will also install the liberty server to the openliberty.home directory
 - Clone the repo
 - Update the openliberty.home property in the poms
   - _TODO: this should be externalized_
