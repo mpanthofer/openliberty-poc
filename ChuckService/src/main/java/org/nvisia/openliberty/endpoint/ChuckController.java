@@ -11,7 +11,6 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import org.apache.log4j.Logger;
 import org.nvisia.openliberty.dao.ChuckDao;
 import org.nvisia.openliberty.dao.icndb.ChuckJoke;
 
@@ -20,8 +19,6 @@ import org.nvisia.openliberty.dao.icndb.ChuckJoke;
 public class ChuckController implements Serializable {
 
 	private static final long serialVersionUID = -7120710481036735303L;
-
-	private static final Logger logger = Logger.getLogger(ChuckController.class);
 
 	@Inject
 	private ChuckDao dao;

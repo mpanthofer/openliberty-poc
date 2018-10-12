@@ -1,11 +1,12 @@
 package org.nvisia.openliberty.dao.icndb;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import javax.json.bind.annotation.JsonbProperty;
 
 public class ChuckModel {
 
 	private String type;
-	@JsonProperty("value")
+
+	@JsonbProperty("value")
 	private ChuckJoke joke;
 
 	public String getType() {
