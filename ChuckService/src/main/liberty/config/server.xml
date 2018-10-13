@@ -1,4 +1,4 @@
-<server description="Servlet server">
+<server description="chuck-service server">
     <featureManager>
         <feature>transportSecurity-1.0</feature>
         <feature>cdi-2.0</feature>
@@ -7,10 +7,19 @@
         <feature>jsonb-1.0</feature>
         <feature>mpConfig-1.3</feature>
         <feature>mpRestClient-1.1</feature>
+        <feature>mpOpenTracing-1.1</feature>
+        <feature>usr:opentracingZipkin-0.31</feature>
     </featureManager>
+
+    <opentracingZipkin host="localhost"/>
 
     <httpEndpoint httpPort="${default.http.port}" httpsPort="${default.https.port}" id="defaultHttpEndpoint"  host="*" />
     
     <keyStore id="defaultKeyStore" location="keystore.p12" password="changeit" type="PKCS12"/>
+
+    <webApplication location="chuck-service.war" contextRoot="/chuck-service">
+        <!-- enable visibility to third party apis -->
+        <classloader apiTypeVisibility="api,ibm-api,spec,stable,third-party"/>
+    </webApplication>
 
 </server>
