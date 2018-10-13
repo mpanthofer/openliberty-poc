@@ -13,6 +13,7 @@ import javax.ws.rs.core.MediaType;
 
 import org.nvisia.openliberty.dao.ChuckDao;
 import org.nvisia.openliberty.dao.icndb.ChuckJoke;
+import org.nvisia.openliberty.exceptions.BadRequestException;
 
 @RequestScoped
 @Path("/chucks")
@@ -42,7 +43,11 @@ public class ChuckController implements Serializable {
 	@GET
 	@Path("/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public ChuckJoke get(@PathParam("id") long id, HttpServletResponse response) {
+	public ChuckJoke get(@PathParam("id") Long id) {
+		if (id < 0) {
+			throw new BadRequestException("id must be a non-negative integer");
+		}
+		
 		return dao.getChuckJoke(id);
 	}
 }
