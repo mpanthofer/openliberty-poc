@@ -6,11 +6,11 @@ Prototype using IBM OpenLiberty.
 ## Zipkin
 If you want to see distributed traces, you will need to install Zipkin and start it up.  If it isn't running, the traces will disappear into the aether.  The easiest way to do this is to run the following commands.
 
-curl -sSL https://zipkin.io/quickstart.sh | bash -s
-java -jar zipkin
+> curl -sSL https://zipkin.io/quickstart.sh | bash -s
+> java -jar zipkin
 
 Or you can run it via docker image:
-docker run -d -p 9411:9411 openzipkin/zipkin
+> docker run -d -p 9411:9411 openzipkin/zipkin
 
 # Instructions to run the Prototype
 - Download and install the OpenLiberty server
