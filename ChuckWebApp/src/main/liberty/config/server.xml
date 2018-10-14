@@ -7,4 +7,5 @@
     <httpEndpoint httpPort="${httpPort}" httpsPort="${httpsPort}" id="defaultHttpEndpoint"  host="*" />
     
     <keyStore id="defaultKeyStore" location="keystore.p12" password="changeit" type="PKCS12"/>
+
 </server>

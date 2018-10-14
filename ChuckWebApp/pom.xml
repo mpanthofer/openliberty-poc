@@ -26,6 +26,7 @@
 		<openliberty.home>/home/jgitter/bin/openliberty</openliberty.home>
 		<openliberty.server>chuck</openliberty.server>
 		<openliberty.Xmx>1028m</openliberty.Xmx>
+		<openliberty.appname>chuck</openliberty.appname>
 	</properties>
 
 	<dependencies>
@@ -325,11 +326,13 @@
 							<execution>
 								<phase>pre-integration-test</phase>
 								<goals>
-									<goal>deploy</goal>
+									<goal>install-apps</goal>
 								</goals>
 								<configuration>
-									<appArchive>${project.build.directory}/${project.artifactId}-${project.version}.war</appArchive>
-									<installDirectory>${openliberty.home}</installDirectory>
+									<appsDirectory>apps</appsDirectory>
+									<stripVersion>true</stripVersion>
+									<installAppPackages>project</installAppPackages>
+									<looseApplication>true</looseApplication>
 								</configuration>
 							</execution>
 						</executions>
@@ -392,6 +395,7 @@
 									<include>runnable</include>
 									<serverName>${openliberty.server}</serverName>
 									<installDirectory>${openliberty.home}</installDirectory>
+									<appDeployName>${openliberty.appname}</appDeployName>
 								</configuration>
 							</execution>
 						</executions>

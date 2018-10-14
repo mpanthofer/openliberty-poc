@@ -27,7 +27,7 @@
 		<openliberty.http.port>8080</openliberty.http.port>
 		<openliberty.https.port>8443</openliberty.https.port>
 		<openliberty.home>/home/jgitter/bin/openliberty</openliberty.home>
-		<openliberty.appname></openliberty.appname>
+		<openliberty.appname>chuck-service</openliberty.appname>
 		<openliberty.Xmx>1028m</openliberty.Xmx>
 
 		<zipkin.usr.feature>https://github.com/WASdev/sample.opentracing.zipkintracer/releases/download/1.1/liberty-opentracing-zipkintracer-1.1-sample.zip</zipkin.usr.feature>
