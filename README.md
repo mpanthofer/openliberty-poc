@@ -28,5 +28,6 @@ docker run -d -p 9411:9411 openzipkin/zipkin
     - If you change the server.xml or the bootstrap properties, you will need to rerun this and restart the liberty server
   - mvn clean install -Pdeploy
     - This will deploy the applications to the server apps directory
-    - Once this is done, you can simply run mvn clean install and the server will pick up your latest changes
+    - Once this is done, you can simply run mvn clean install for the backend and the server will pick up your latest changes
+    - The frontend needs to be redeployed each time.  To understand why, look at the looseApplication parameter on the install-apps goal
 - Access the chuck application at https://localhost:8543/chuck
