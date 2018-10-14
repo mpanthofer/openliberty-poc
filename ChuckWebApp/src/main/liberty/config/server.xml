@@ -8,4 +8,5 @@
     
     <keyStore id="defaultKeyStore" location="keystore.p12" password="changeit" type="PKCS12"/>
 
+    <webApplication location="chuck-webapp.war" contextRoot="/chuck" />>
 </server>

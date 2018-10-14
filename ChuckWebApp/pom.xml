@@ -332,7 +332,6 @@
 									<appsDirectory>apps</appsDirectory>
 									<stripVersion>true</stripVersion>
 									<installAppPackages>project</installAppPackages>
-									<looseApplication>true</looseApplication>
 								</configuration>
 							</execution>
 						</executions>
