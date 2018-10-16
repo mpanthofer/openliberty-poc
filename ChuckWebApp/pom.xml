@@ -29,8 +29,31 @@
 		<openliberty.appname>chuck</openliberty.appname>
 	</properties>
 
-	<dependencies>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>io.openliberty.features</groupId>
+				<artifactId>features-bom</artifactId>
+				<version>RELEASE</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
+	<dependencies>
+		<dependency>
+			<groupId>io.openliberty.features</groupId>
+			<artifactId>mpHealth-1.0</artifactId>
+			<type>esa</type>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.5.6</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -194,11 +217,13 @@
 							<executable>node_modules/@angular/cli/bin/ng</executable>
 							<arguments>
 								<argument>build</argument>
-								<argument>--prod</argument>
+								<!-- Removing this for now as it DOUBLES the build time <argument>- 
+									- prod</argument> -->
 								<argument>--base-href</argument>
 								<argument>/chuck/</argument>
 							</arguments>
-			f				<workingDirectory>${basedir}/target/angular/chuck</workingDirectory>
+							f
+							<workingDirectory>${basedir}/target/angular/chuck</workingDirectory>
 						</configuration>
 					</execution>
 				</executions>

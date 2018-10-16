@@ -305,7 +305,8 @@
 							<execution>
 								<phase>pre-integration-test</phase>
 								<goals>
-									<!-- I can't do it this way anymore because I need to configure the api visibility for zipkin -->
+									<!-- I can't do it this way anymore because I need to configure 
+										the api visibility for zipkin -->
 									<!-- <goal>deploy</goal> -->
 									<goal>install-apps</goal>
 								</goals>
