@@ -9,16 +9,21 @@
         <feature>mpRestClient-1.1</feature>
         <feature>mpOpenTracing-1.1</feature>
         <feature>usr:opentracingZipkin-0.31</feature>
+        <feature>mpMetrics-1.1</feature>
     </featureManager>
 
+    <!-- Configure the open tracing feature with the location of the zipkin install -->
     <opentracingZipkin host="localhost"/>
 
     <httpEndpoint httpPort="${default.http.port}" httpsPort="${default.https.port}" id="defaultHttpEndpoint"  host="*" />
     
     <keyStore id="defaultKeyStore" location="keystore.p12" password="changeit" type="PKCS12"/>
 
+    <!-- This user is granted administrator rights and can view the metrics endpoint -->
+    <quickStartSecurity userName="admin" userPassword="s3cret"/>
+
     <webApplication location="chuck-service.war" contextRoot="/chuck-service">
-        <!-- enable visibility to third party apis -->
+        <!-- enable visibility to third party apis for zipkin -->
         <classloader apiTypeVisibility="api,ibm-api,spec,stable,third-party"/>
     </webApplication>
 

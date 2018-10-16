@@ -82,6 +82,12 @@
 			<type>esa</type>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>io.openliberty.features</groupId>
+			<artifactId>mpMetrics-1.1</artifactId>
+			<type>esa</type>
+			<scope>provided</scope>
+		</dependency>
 
 		<dependency>
 			<groupId>junit</groupId>

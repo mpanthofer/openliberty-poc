@@ -10,6 +10,8 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.eclipse.microprofile.metrics.MetricUnits;
+import org.eclipse.microprofile.metrics.annotation.Timed;
 import org.eclipse.microprofile.opentracing.Traced;
 import org.nvisia.openliberty.dao.ChuckDao;
 import org.nvisia.openliberty.dao.icndb.ChuckJoke;
@@ -25,23 +27,21 @@ public class ChuckController implements Serializable {
 
 	@Inject
 	private ChuckDao dao;
-	
+
 	@Inject
 	private Tracer tracer;
 
 	/*
 	 * Oddly, constructor injection doesn't appear to work in CDI 2.0 on Liberty?
 	 * 
-	@Inject
-	public ChuckController(ChuckDao dao) {
-		this.dao = dao;
-	}
-	*/
+	 * @Inject public ChuckController(ChuckDao dao) { this.dao = dao; }
+	 */
 
 	@GET
 	@Path("")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Traced
+	@Timed(name = "getChuckJoke-Time", unit = MetricUnits.MILLISECONDS, absolute = true, description = "Measures the time taken to call the service")
 	public ChuckJoke get() {
 		tracer.activeSpan().log("Getting random joke");
 		return dao.getRandomChuckJoke();
@@ -56,9 +56,9 @@ public class ChuckController implements Serializable {
 			tracer.activeSpan().log(String.format("id value of %d is inavlid", id));
 			throw new BadRequestException("id must be a non-negative integer");
 		}
-		
+
 		tracer.activeSpan().log("Getting joke #" + id);
-		
+
 		return dao.getChuckJoke(id);
 	}
 }
