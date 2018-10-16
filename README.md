@@ -39,3 +39,7 @@ After you've accessed the application, you can head to http://localhost:9411/zip
 
 ## Try the HealthCheck
 Healthcheck is available at https://localhost:8543/health
+
+## Look at the metrics
+Metrics are availabe at https://localhost:8443/metrics
+You'll have to authenticate as an administrator using credentials admin:s3cret.
