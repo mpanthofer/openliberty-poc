@@ -31,3 +31,11 @@ docker run -d -p 9411:9411 openzipkin/zipkin
     - Once this is done, you can simply run mvn clean install for the backend and the server will pick up your latest changes
     - The frontend needs to be redeployed each time.  To understand why, look at the looseApplication parameter on the install-apps goal
 - Access the chuck application at https://localhost:8543/chuck
+
+# Things to look at
+
+## Zipkin distributed trace logs
+After you've accessed the application, you can head to http://localhost:9411/zipkin/ (if you started it up) to look at your traces.
+
+## Try the HealthCheck
+Healthcheck is available at https://localhost:8543/health
