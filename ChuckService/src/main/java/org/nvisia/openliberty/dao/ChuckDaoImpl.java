@@ -3,11 +3,16 @@ package org.nvisia.openliberty.dao;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 
+import org.eclipse.microprofile.opentracing.Traced;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 import org.nvisia.openliberty.dao.icndb.ChuckJoke;
 import org.nvisia.openliberty.dao.icndb.ICNDBClient;
 import org.nvisia.openliberty.exceptions.ChuckException;
 
+import io.opentracing.Scope;
+import io.opentracing.Tracer;
+
+@Traced
 @RequestScoped
 public class ChuckDaoImpl implements ChuckDao {
 
