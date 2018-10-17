@@ -2,6 +2,7 @@ package org.nvisia.openliberty.dao;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+import javax.ws.rs.ProcessingException;
 
 import org.eclipse.microprofile.metrics.MetricUnits;
 import org.eclipse.microprofile.metrics.annotation.Counted;
@@ -26,12 +27,24 @@ public class ChuckDaoImpl implements ChuckDao {
 	@Counted(name = "getRandomJoke-CallCount")
 	@Timed(name = "getRandomJoke-Time", unit = MetricUnits.MILLISECONDS)
 	public ChuckJoke getRandomChuckJoke() throws ChuckException {
-		return client.getRandomJoke("[explicit]").getJoke();
+		try {
+			return client.getRandomJoke("[explicit]").getJoke();
+		} catch (ProcessingException e) {
+			throw new ChuckException(e);
+		}
 	}
 
 	@Override
 	public ChuckJoke getChuckJoke(long id) throws ChuckException {
-		return client.getJoke(id).getJoke();
+		try {
+			return client.getJoke(id).getJoke();
+		} catch (ProcessingException e) {
+			throw new ChuckException(e);
+		}
 	}
 
+	// package-private for testing only
+	void setClient(ICNDBClient client) {
+		this.client = client;
+	}
 }

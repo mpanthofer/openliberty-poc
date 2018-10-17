@@ -53,12 +53,22 @@ public class ChuckController implements Serializable {
 	@Traced
 	public ChuckJoke get(@PathParam("id") long id) {
 		if (id < 0) {
-			tracer.activeSpan().log(String.format("id value of %d is inavlid", id));
+			tracer.activeSpan().log(String.format("id value of %d is invalid", id));
 			throw new BadRequestException("id must be a non-negative integer");
 		}
 
 		tracer.activeSpan().log("Getting joke #" + id);
 
 		return dao.getChuckJoke(id);
+	}
+
+	// package-private method to enable testing
+	void setChuckDao(ChuckDao dao) {
+		this.dao = dao;
+	}
+
+	// package-private method to enable testing
+	void setTracer(Tracer tracer) {
+		this.tracer = tracer;
 	}
 }
