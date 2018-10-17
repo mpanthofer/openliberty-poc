@@ -15,6 +15,14 @@ Or you can run it via docker image:
 docker run -d -p 9411:9411 openzipkin/zipkin
 ```
 
+## Mountebank
+The integration tests use Mountebank for over-the-wire test doubles so I don't anger the owner of the ICNDB application.  If you don't have mountebank running, the integration tests will fail.  For installation options see http://www.mbtest.org/docs/install.
+
+Alternatively, you can run it via a docker image:
+```
+docker run -p 2525:2525 -d expert360/mountebank
+```
+
 # Instructions to run the Prototype
 - Download and install the OpenLiberty server
   - I'm running Open Liberty 18.0.0.3 against OpenJDK 1.8.0_171
