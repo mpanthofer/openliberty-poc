@@ -38,9 +38,14 @@ docker run -p 2525:2525 -d expert360/mountebank
     - This will deploy the applications to the server apps directory
     - Once this is done, you can simply run mvn clean install for the backend and the server will pick up your latest changes
     - The frontend needs to be redeployed each time.  To understand why, look at the looseApplication parameter on the install-apps goal
-- Access the chuck application at https://localhost:8543/chuck
+- Alternatively to run using the fatjar concept
+  - mvn clean install -Pfatjar
+    - This will build a fatjar with an embedded openliberty container and start it directly from the console
 
 # Things to look at
+
+## The Chuck Application
+https://localhost:8543/chuck
 
 ## Zipkin distributed trace logs
 After you've accessed the application, you can head to http://localhost:9411/zipkin/ (if you started it up) to look at your traces.
