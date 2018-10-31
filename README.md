@@ -15,6 +15,8 @@ Or you can run it via docker image:
 docker run -d -p 9411:9411 openzipkin/zipkin
 ```
 
+See https://angular.io/guide/quickstart for details about pre-requisites
+
 ## Angular CLI
 Without this, the front-end build will fail. To install:
 ```
