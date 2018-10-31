@@ -15,13 +15,14 @@ Or you can run it via docker image:
 docker run -d -p 9411:9411 openzipkin/zipkin
 ```
 
-See https://angular.io/guide/quickstart for details about pre-requisites
-
 ## Angular CLI
 Without this, the front-end build will fail. To install:
 ```
-npm install -g @angular/cli
+cd ChuckWebApp
+npm install @angular/cli
 ```
+
+See https://angular.io/guide/quickstart for information about prerequisites
 
 ## Mountebank
 The integration tests use Mountebank for over-the-wire test doubles so I don't anger the owner of the ICNDB application.  If you don't have mountebank running, the integration tests will fail.  For installation options see http://www.mbtest.org/docs/install.
