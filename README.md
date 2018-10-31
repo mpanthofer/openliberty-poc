@@ -26,7 +26,7 @@ docker run -p 2525:2525 -d expert360/mountebank
 # Instructions to run the Prototype
 - Download and install the OpenLiberty server
   - I'm running Open Liberty 18.0.0.3 against OpenJDK 1.8.0_171
-  - If you skip this step, the start-liberty profile will also install the liberty server to the openliberty.home directory
+  - If you skip this step, it is possible for the start-liberty profile to install the liberty server to the openliberty.home directory for you, but you first have to remove the installDirectory attribute from the plugin configurations.  It is generally easier to install it yourself.
 - Clone the repo
 - Update the openliberty.home property in the poms
   - _TODO: this should be externalized_
