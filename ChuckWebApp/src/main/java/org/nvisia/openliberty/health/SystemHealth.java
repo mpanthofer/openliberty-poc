@@ -42,7 +42,7 @@ public class SystemHealth implements HealthCheck {
 
 		boolean pass = true;
 		
-		builder.withData("is chuck down, dwight?", "false, chuck never goes down");
+		builder.withData("is Chuck down, Dwight?", "False, Chuck never goes down");
 		
 		builder.withData("Best Chuck Norris joke", "Jesus may walk on water, but Chuck Norris can swim through land");
 
@@ -52,7 +52,7 @@ public class SystemHealth implements HealthCheck {
 		
 		try {
 			HttpClient client = getClient();
-			HttpResponse response = client.execute(new HttpGet("https://localhost:8443"));
+			HttpResponse response = client.execute(new HttpGet("https://localhost:8443/chuck-service/rest/chucks/1"));
 			pass = response.getStatusLine().getStatusCode() == HttpStatus.SC_OK;
 			
 			builder.withData("chuck-service context returned", response.getStatusLine().getStatusCode());
