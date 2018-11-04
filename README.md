@@ -7,13 +7,22 @@ Prototype using IBM OpenLiberty.
 If you want to see distributed traces, you will need to install Zipkin and start it up.  If it isn't running, the traces will disappear into the aether.  The easiest way to do this is to run the following commands.
 ```
 curl -sSL https://zipkin.io/quickstart.sh | bash -s
-java -jar zipkin
+java -jar zipkin.jar
 ```
 
 Or you can run it via docker image:
 ```
 docker run -d -p 9411:9411 openzipkin/zipkin
 ```
+
+## Angular CLI
+Without this, the front-end build will fail. To install:
+```
+cd ChuckWebApp
+npm install @angular/cli
+```
+
+See https://angular.io/guide/quickstart for information about prerequisites
 
 ## Mountebank
 The integration tests use Mountebank for over-the-wire test doubles so I don't anger the owner of the ICNDB application.  If you don't have mountebank running, the integration tests will fail.  For installation options see http://www.mbtest.org/docs/install.
@@ -26,7 +35,7 @@ docker run -p 2525:2525 -d expert360/mountebank
 # Instructions to run the Prototype
 - Download and install the OpenLiberty server
   - I'm running Open Liberty 18.0.0.3 against OpenJDK 1.8.0_171
-  - If you skip this step, the start-liberty profile will also install the liberty server to the openliberty.home directory
+  - If you skip this step, it is possible for the start-liberty profile to install the liberty server to the openliberty.home directory for you, but you first have to remove the installDirectory attribute from the plugin configurations.  It is generally easier to install it yourself.
 - Clone the repo
 - Update the openliberty.home property in the poms
   - _TODO: this should be externalized_

@@ -8,7 +8,7 @@
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>war</packaging>
 
-	<name>Chuck Service</name>
+	<name>Chuck WebApp</name>
 	<description>Web Application for displaying Chuck Norris jokes to users</description>
 
 	<contributors>
