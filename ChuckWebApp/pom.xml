@@ -157,6 +157,14 @@
 			</plugin>
 			<plugin>
 				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.7</version>
+				<dependencies>
+					<dependency>
+						<groupId>org.apache.maven.shared</groupId>
+						<artifactId>maven-filtering</artifactId>
+						<version>1.3</version>
+					</dependency>
+				</dependencies>
 				<executions>
 					<execution>
 						<id>copy-angular2-dir</id>
@@ -172,6 +180,25 @@
 									<includes>
 										<include>chuck/**/*.*</include>
 									</includes>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+					<execution>
+						<id>copy-keystore</id>
+						<phase>pre-integration-test</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${openliberty.home}/usr/servers/${openliberty.server}</outputDirectory>
+							<resources>
+								<resource>
+									<directory>${project.build.directory}</directory>
+									<includes>
+										<include>keystore.p12</include>
+									</includes>
+									<filtering>false</filtering>
 								</resource>
 							</resources>
 						</configuration>
@@ -209,10 +236,10 @@
 				<executions>
 					<execution>
 						<id>angular-cli build</id>
+						<phase>generate-resources</phase>
 						<goals>
 							<goal>exec</goal>
 						</goals>
-						<phase>generate-resources</phase>
 						<configuration>
 							<executable>node_modules/@angular/cli/bin/ng</executable>
 							<arguments>
@@ -222,7 +249,6 @@
 								<argument>--base-href</argument>
 								<argument>/chuck/</argument>
 							</arguments>
-							f
 							<workingDirectory>${basedir}/target/angular/chuck</workingDirectory>
 						</configuration>
 					</execution>
@@ -241,191 +267,62 @@
 					</assemblyArtifact>
 					<installDirectory>${openliberty.home}</installDirectory>
 					<serverName>${openliberty.server}</serverName>
+					<appDeployName>${openliberty.appname}</appDeployName>
+					<configFile>${project.build.directory}/server.xml</configFile>
 				</configuration>
+				<executions>
+					<execution>
+						<id>setup liberty</id>
+						<phase>pre-integration-test</phase>
+						<goals>
+							<goal>install-server</goal>
+							<goal>create-server</goal>
+							<goal>install-apps</goal>
+						</goals>
+						<configuration>
+							<assemblyInstallDirectory>${openliberty.home}</assemblyInstallDirectory>
+							<appsDirectory>apps</appsDirectory>
+							<stripVersion>true</stripVersion>
+							<installAppPackages>project</installAppPackages>
+							<bootstrapProperties>
+								<httpPort>${openliberty.http.port}</httpPort>
+								<httpsPort>${openliberty.https.port}</httpsPort>
+							</bootstrapProperties>
+							<jvmOptions>
+								<param>-Xmx${openliberty.Xmx}</param>
+							</jvmOptions>
+						</configuration>
+					</execution>
+					<execution>
+					    <id>start server</id>
+						<phase>pre-integration-test</phase>
+						<goals>
+							<goal>start-server</goal>
+						</goals>
+						<configuration>
+                			<verifyTimeout>60</verifyTimeout>
+						</configuration>
+					</execution>
+					<execution>
+					    <id>stop server</id>
+						<phase>post-integration-test</phase>
+						<goals>
+							<goal>stop-server</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>construct fatjar</id>
+						<phase>install</phase>
+						<goals>
+							<goal>package-server</goal>
+						</goals>
+						<configuration>
+							<packageFile>${project.build.directory}/${project.artifactId}.jar</packageFile>
+							<include>runnable</include>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
-
-	<profiles>
-		<profile>
-			<id>fatjar</id>
-			<activation>
-				<property>
-					<name>fatjar</name>
-				</property>
-			</activation>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>net.wasdev.wlp.maven.plugins</groupId>
-						<artifactId>liberty-maven-plugin</artifactId>
-
-						<executions>
-							<execution>
-								<phase>install</phase>
-								<goals>
-									<goal>install-server</goal>
-									<goal>create-server</goal>
-									<goal>run-server</goal>
-								</goals>
-
-								<configuration>
-									<configFile>${project.build.directory}/server.xml</configFile>
-									<bootstrapProperties>
-										<httpPort>${openliberty.http.port}</httpPort>
-										<httpsPort>${openliberty.https.port}</httpsPort>
-									</bootstrapProperties>
-									<jvmOptions>
-										<param>-Xmx${openliberty.Xmx}</param>
-									</jvmOptions>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-
-				</plugins>
-			</build>
-		</profile>
-
-		<profile>
-			<id>start-liberty</id>
-			<activation>
-				<property>
-					<name>start-liberty</name>
-				</property>
-			</activation>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>net.wasdev.wlp.maven.plugins</groupId>
-						<artifactId>liberty-maven-plugin</artifactId>
-						<executions>
-							<execution>
-								<id>1</id>
-								<phase>pre-integration-test</phase>
-								<goals>
-									<goal>install-server</goal>
-								</goals>
-								<configuration>
-									<assemblyInstallDirectory>${openliberty.home}</assemblyInstallDirectory>
-								</configuration>
-							</execution>
-							<execution>
-								<id>2</id>
-								<phase>pre-integration-test</phase>
-								<goals>
-									<goal>create-server</goal>
-									<goal>start-server</goal>
-								</goals>
-								<configuration>
-									<installDirectory>${openliberty.home}</installDirectory>
-									<serverName>${openliberty.server}</serverName>
-									<configFile>${project.build.directory}/server.xml</configFile>
-									<bootstrapProperties>
-										<httpPort>${openliberty.http.port}</httpPort>
-										<httpsPort>${openliberty.https.port}</httpsPort>
-									</bootstrapProperties>
-									<jvmOptions>
-										<param>-Xmx${openliberty.Xmx}</param>
-									</jvmOptions>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-		<profile>
-			<id>deploy</id>
-			<activation>
-				<property>
-					<name>deploy</name>
-				</property>
-			</activation>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>net.wasdev.wlp.maven.plugins</groupId>
-						<artifactId>liberty-maven-plugin</artifactId>
-						<executions>
-							<execution>
-								<phase>pre-integration-test</phase>
-								<goals>
-									<goal>install-apps</goal>
-								</goals>
-								<configuration>
-									<appsDirectory>apps</appsDirectory>
-									<stripVersion>true</stripVersion>
-									<installAppPackages>project</installAppPackages>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-					<plugin>
-						<artifactId>maven-resources-plugin</artifactId>
-						<version>2.7</version>
-						<dependencies>
-							<dependency>
-								<groupId>org.apache.maven.shared</groupId>
-								<artifactId>maven-filtering</artifactId>
-								<version>1.3</version>
-							</dependency>
-						</dependencies>
-						<executions>
-							<execution>
-								<id>copy-keystore</id>
-								<phase>pre-integration-test</phase>
-								<goals>
-									<goal>copy-resources</goal>
-								</goals>
-								<configuration>
-									<outputDirectory>${openliberty.home}/usr/servers/${openliberty.server}</outputDirectory>
-									<resources>
-										<resource>
-											<directory>${project.build.directory}</directory>
-											<includes>
-												<include>keystore.p12</include>
-											</includes>
-											<filtering>false</filtering>
-										</resource>
-									</resources>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-		<profile>
-			<id>package-liberty</id>
-			<activation>
-				<property>
-					<name>package-liberty</name>
-				</property>
-			</activation>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>net.wasdev.wlp.maven.plugins</groupId>
-						<artifactId>liberty-maven-plugin</artifactId>
-						<executions>
-							<execution>
-								<phase>package</phase>
-								<goals>
-									<goal>package-server</goal>
-								</goals>
-								<configuration>
-									<packageFile>${project.build.directory}/${project.artifactId}.jar</packageFile>
-									<include>runnable</include>
-									<serverName>${openliberty.server}</serverName>
-									<installDirectory>${openliberty.home}</installDirectory>
-									<appDeployName>${openliberty.appname}</appDeployName>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-	</profiles>
 </project>
