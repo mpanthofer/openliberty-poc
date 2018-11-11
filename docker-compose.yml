@@ -1,0 +1,22 @@
+version: "3.1"
+services:
+  chuck-web:
+    build: ./ChuckWebApp
+    networks:
+      - chuck
+    ports: 
+      - "8543:8543"
+  chuck:
+    build: ./ChuckService
+    networks:
+      - chuck
+    ports: 
+      - "8443:8443"
+  trace:
+    image: openzipkin/zipkin:latest
+    networks:
+      - chuck
+    ports:
+      - "9411:9411"
+networks:
+  chuck:
