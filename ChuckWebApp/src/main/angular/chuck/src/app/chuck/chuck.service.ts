@@ -7,7 +7,7 @@ import { Chuck } from './chuck.model'
   providedIn: 'root',
 })
 export class ChuckService {
-    private baseUrl: string = "https://localhost:8443/chuck-service/rest";
+    private baseUrl: string = "/chuck/rest";
 
     public constructor(private http: HttpClient) { }
 

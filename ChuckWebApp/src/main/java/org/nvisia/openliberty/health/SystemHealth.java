@@ -52,7 +52,7 @@ public class SystemHealth implements HealthCheck {
 		
 		try {
 			HttpClient client = getClient();
-			HttpResponse response = client.execute(new HttpGet("https://localhost:8443"));
+			HttpResponse response = client.execute(new HttpGet("https://chuck:8443"));
 			pass = response.getStatusLine().getStatusCode() == HttpStatus.SC_OK;
 			
 			builder.withData("chuck-service context returned", response.getStatusLine().getStatusCode());
