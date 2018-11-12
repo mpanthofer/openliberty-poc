@@ -6,7 +6,7 @@
 	<groupId>org.nvisia.openliberty</groupId>
 	<artifactId>chuck-service</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 
 	<name>Chuck Service</name>
 	<description>Simple Service that returns random Chuck Norris jokes for use ... anywhere</description>
